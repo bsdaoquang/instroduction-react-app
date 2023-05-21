@@ -1,7 +1,8 @@
 import { Button, Checkbox, List, Space } from 'antd'
 import React from 'react'
 
-function TaskItemComponent(props) {
+function TaskItemComponent(props)
+{
   const { item, index, onDelete, onCompleted } = props
 
   return (
