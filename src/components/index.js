@@ -1,4 +1,4 @@
-import CardStoryItem from './CardStoryItem'
-import TitleComponent from './TitleComponent'
+import ListTaskComponent from './ListTaskComponent'
+import TaskItemComponent from './TaskItemComponent'
 
-export { CardStoryItem, TitleComponent }
+export { ListTaskComponent, TaskItemComponent }
