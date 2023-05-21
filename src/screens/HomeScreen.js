@@ -1,6 +1,7 @@
 import { Button, Card, Divider, Input, List, Space, message } from 'antd'
 
 import { ListTaskComponent, TaskItemComponent } from '../components'
+// import TASKS from '../data.json'
 
 import React from 'react'
 
@@ -25,7 +26,7 @@ function HomeScreen() {
         <Divider />
 
         <ListTaskComponent>
-          {TASKS.length > 0 ? (
+          {/* {TASKS.length > 0 ? (
             <List
               itemLayout="horizontal"
               dataSource={TASKS}
@@ -40,7 +41,7 @@ function HomeScreen() {
                 />
               )}
             />
-          ) : null}
+          ) : null} */}
         </ListTaskComponent>
       </Card>
     </div>

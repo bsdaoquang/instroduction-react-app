@@ -1,11 +1,11 @@
 import 'antd/dist/reset.css'
 import './App.css'
-import { HomeScreen } from './screens'
+import Session5Screen from './screens/Session5Screen'
 
 function App() {
   return (
     <div className="container mt-4">
-      <HomeScreen />
+      <Session5Screen />
     </div>
   )
 }
