@@ -1,23 +1,50 @@
-import { Card, Button, List } from 'antd'
-import React from 'react'
-import { stories } from '../datas/stories'
-import CardStoryItem from '../components/CardStoryItem'
+import React, { useEffect, useState } from 'react'
+import { Button, Input, message } from 'antd'
+import { onValue, push, ref } from 'firebase/database'
+import { db } from '../firebase/firebaseConfig'
 
 function HomeScreen() {
+  const [content, setContent] = useState('')
+  const [conversations, setConversations] = useState()
+
+  const hanleSendContent = () => {
+    push(ref(db, `/conversations`), {
+      content,
+      createdAt: Date.now(),
+    }).then(() => message.success('đã gửi'))
+  }
+
+  useEffect(() => {
+    onValue(ref(db, 'conversations'), (snap) => {
+      if (snap.val()) {
+        const items = []
+
+        snap.forEach((item) => {
+          items.push({
+            key: item.key,
+            ...item.val(),
+          })
+        })
+
+        setConversations(items)
+      }
+    })
+  }, [])
+
+  // console.log('fhajgfshj')
+
+  console.log(conversations)
+
   return (
     <div className="col-8 offset-2">
-      <Card
-        className="cardStory"
-        title="Mới cập nhật"
-        size="small"
-        extra={<Button type="link" icon={<i class="fas fa-ellipsis-h" />} />}
-      >
-        <List
-          grid={{ gutter: 16, column: 4 }}
-          dataSource={stories}
-          renderItem={(item) => <CardStoryItem item={item} />}
-        />
-      </Card>
+      <Input
+        placeholder="text"
+        value={content}
+        onChange={(val) => setContent(val.target.value)}
+        allowClear
+      />
+
+      <Button onClick={hanleSendContent}>Send</Button>
     </div>
   )
 }
