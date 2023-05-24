@@ -1,0 +1,1 @@
+const getTotday = () => Date.now()

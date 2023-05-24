@@ -1,17 +1,73 @@
 import { Button, Card, Divider, Input, List, Space, message } from 'antd'
-
 import { ListTaskComponent, TaskItemComponent } from '../components'
+import React, { useState } from 'react'
 
-import React from 'react'
+// vùng import 
 
-function HomeScreen() {
-  const handleAddNewTask = (val) => {
-    if (!val) {
-      message.error('Please enter task!')
+const HomeScreen = (props) =>
+{
+
+  const [content, setContent] = useState('');
+  const [tasks, setTasks] = useState([]);
+  /*
+  
+  vùng useState
+
+  */
+
+
+  /*
+  
+  useEffect
+
+  */
+
+  /*
+    logic, function
+  */
+
+  const handleAddNewTask = () =>
+  {
+    const data = {
+      id: tasks.length + 1,
+      content,
+      isCompleted: false,
+      createdAt: Date.now()
     }
 
-    message.success(`Task ${val} added!`)
+    const items = [...tasks, data]
+
+    setTasks(items)
+
+    setContent('')
+    message.success('Add new task successfully!')
   }
+
+  const handleRemoveTaks = (index) =>
+  {
+    tasks.splice(index, 1)
+
+    const newItems = [...tasks]
+
+    setTasks(newItems)
+
+    message.success('Task removed!')
+  }
+
+  const handleChangeStatusTask = (index) =>
+  {
+    const newitems = [...tasks]
+
+    const task = (newitems[index])
+
+
+    task.isCompleted = !task.isCompleted
+
+    setTasks(newitems)
+
+  }
+
+
 
   return (
     <div className="col-8 offset-2 mt-4" style={{ padding: 20 }}>
@@ -19,27 +75,30 @@ function HomeScreen() {
         <Input
           placeholder="Add new task"
           size="large"
+          value={content}
+          onChange={(val) => setContent(val.target.value)}
           allowClear
-          onPressEnter={(val) => handleAddNewTask(val.target.value)}
+          onPressEnter={handleAddNewTask}
         />
         <Divider />
 
         <ListTaskComponent>
-          {TASKS.length > 0 ? (
+          {tasks.length > 0 ? (
             <List
               itemLayout="horizontal"
-              dataSource={TASKS}
+              dataSource={tasks}
               renderItem={(item, index) => (
                 <TaskItemComponent
                   item={item}
                   index={index}
-                  onDelete={(index) => message.info(`Deleted task ${index}`)}
+                  onDelete={(index) => handleRemoveTaks(index)}
                   onCompleted={(index) =>
-                    message.info(`Change task state to is completed`)
+                    handleChangeStatusTask(index)
                   }
                 />
               )}
             />
+
           ) : null}
         </ListTaskComponent>
       </Card>
