@@ -4,44 +4,29 @@ import React, { useEffect, useState } from 'react';
 import { posts } from '../datas/posts';
 import { Avatar, Button, Card, Input, List, Spin, Space } from 'antd';
 
-function Session7ListAndMap()
+function Session8UseEffectCallApi()
 {
   const [myPosts, setMyPosts] = useState([]);
-  const [postId, setPostId] = useState(2);
-
-  const myId = 1;
 
   useEffect(() =>
   {
-    getPostsById()
-  }, [postId])
-
-  const getPostsById = () =>
-  {
-
-    const items = posts.filter((element) => element.userId === postId);
-
-    if (items.length > 0) {
-      setMyPosts(items);
-    } else {
-      setMyPosts([])
-    }
-  }
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(res => res.json())
+      .then(postApi =>
+      {
+        console.log('====================================');
+        setMyPosts(postApi);
+        console.log('====================================');
+      })
+  }, [])
 
 
 
   return (
     <div>
       <Card
-        title={`My id: ${myId}`}
-        extra={
-          <Space>
-            <Button onClick={() => postId > 1 ? alert(`post id can not less than 1`) : setPostId(postId - 1)}>-1</Button>
-            <h5>{postId}</h5>
-            <Button onClick={() => setPostId(postId + 1)}>+1</Button>
-          </Space>
-
-        }>
+        title={`Posts`}
+      >
         {myPosts.length > 0 && (
           <List
             dataSource={myPosts}
@@ -61,4 +46,4 @@ function Session7ListAndMap()
   );
 }
 
-export default Session7ListAndMap;
+export default Session8UseEffectCallApi;
