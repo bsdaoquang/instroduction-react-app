@@ -1,12 +1,22 @@
+import { Layout, Switch } from 'antd'
 import React from 'react'
+
+const { Header } = Layout
 
 function HeaderComponent({ subTitle })
 {
   return (
-    <div className='text-center' style={{ marginTop: 20 }}>
-      <h1>React custom hooks</h1>
-      <h5>{subTitle}</h5>
-    </div>
+
+    <Header style={{ backgroundColor: '#fff' }}>
+      <div className='row'>
+        <div className='col'>
+          <div className='text-right'>
+            <Switch checkedChildren='Light' unCheckedChildren='Dark' />
+          </div>
+        </div>
+      </div>
+    </Header>
+
   )
 }
 
