@@ -19,6 +19,7 @@ function UserComponent({ uid })
 
     item && setProfile(item)
   }
+
   return (
     profile ? <Space style={{ marginBottom: 12 }}>
       <Avatar>{profile.name.substring(0, 1)}</Avatar>
