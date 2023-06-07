@@ -6,6 +6,7 @@ function TaskItemComponent(props)
   const { item, index, onDelete, onCompleted } = props
 
   return (
+
     <List.Item
       actions={[
         <Button
@@ -30,6 +31,7 @@ function TaskItemComponent(props)
         description={`Task ID: ${item.id}`}
       />
     </List.Item>
+
   )
 }
 
