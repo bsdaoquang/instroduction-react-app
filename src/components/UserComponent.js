@@ -23,7 +23,7 @@ function UserComponent({ uid })
 
   return (
     profile ?
-      <Link to={`/user/${uid}`}>
+      <Link to={`/user/${uid}?name=${profile.name}&email=${profile.email}`}>
 
         <Space style={{ marginBottom: 12 }}>
           <Avatar>{profile.name.substring(0, 1)}</Avatar>
